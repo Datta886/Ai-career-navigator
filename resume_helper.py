@@ -1,7 +1,12 @@
-
+import streamlit as st
 from openai import OpenAI
 
-client = OpenAI()
+# Initialize OpenAI client with Groq API
+client = OpenAI(
+    base_url="https://api.groq.com/openai/v1",
+    api_key=st.secrets["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"]
+)
+
 
 def improve_resume(resume_text: str, target_role: str = "Data Analyst") -> str:
     prompt = f"""
@@ -23,3 +28,4 @@ def improve_resume(resume_text: str, target_role: str = "Data Analyst") -> str:
         temperature=0.3
     )
     return resp.choices[0].message.content
+
